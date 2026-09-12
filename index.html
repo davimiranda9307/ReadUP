@@ -133,8 +133,7 @@ src="https://www.facebook.com/tr?id=1649911516639530&ev=PageView&noscript=1"
   /* ---------- Header ---------- */
   header{
     position:sticky; top:0; z-index:40;
-    background:color-mix(in srgb, var(--bg) 88%, transparent);
-    backdrop-filter:blur(8px);
+    background:var(--bg);
     border-bottom:1px solid var(--line);
   }
   .nav{
@@ -279,7 +278,9 @@ src="https://www.facebook.com/tr?id=1649911516639530&ev=PageView&noscript=1"
     border-radius:12px;
     padding:13px 12px 12px;
     display:flex;flex-direction:column;gap:7px;
+    transition:transform .18s ease, box-shadow .18s ease;
   }
+  .mod-card:hover{transform:translateY(-3px);box-shadow:0 10px 22px -14px rgba(21,34,26,.4);}
   .mod-card .top{display:flex;align-items:center;justify-content:space-between;}
   .mod-card .num{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-soft);}
   .mod-card .ico{font-size:20px;}
@@ -316,7 +317,9 @@ src="https://www.facebook.com/tr?id=1649911516639530&ev=PageView&noscript=1"
   .bonus-card{
     background:var(--card);border:1px solid var(--line);border-radius:14px;
     padding:20px;display:flex;flex-direction:column;gap:8px;
+    transition:transform .18s ease, box-shadow .18s ease;
   }
+  .bonus-card:hover{transform:translateY(-3px);box-shadow:0 10px 22px -14px rgba(21,34,26,.4);}
   .bonus-card .b-ico{font-size:26px;}
   .bonus-card h3{font-size:16px;}
   .bonus-card p{margin:0;font-size:13.5px;color:var(--ink-soft);}
@@ -434,12 +437,23 @@ src="https://www.facebook.com/tr?id=1649911516639530&ev=PageView&noscript=1"
   .stickybar .sp small{font-size:10.5px;color:var(--ink-soft);}
   @media (prefers-reduced-motion: reduce){
     .stickybar{transition:none;}
+    .mod-card, .bonus-card{transition:none;}
+    .mod-card:hover, .bonus-card:hover{transform:none;}
   }
 
   /* ---------- Footer ---------- */
   footer{padding:34px 0 110px;border-top:1px solid var(--line);}
   footer p{font-size:12px;color:var(--ink-soft);max-width:70ch;line-height:1.6;}
   footer .fbrand{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;color:var(--ink);margin-bottom:10px;}
+
+  /* ---------- Scroll reveal (progressive enhancement: invisible only once JS confirms it's off-screen) ---------- */
+  .reveal{transition:opacity .5s ease, transform .5s ease;}
+  .reveal.pending{opacity:0; transform:translateY(16px);}
+  .reveal.in{opacity:1; transform:none;}
+  .reveal.d1{transition-delay:.06s}
+  .reveal.d2{transition-delay:.13s}
+  .reveal.d3{transition-delay:.20s}
+  .reveal.d4{transition-delay:.27s}
 
   @media (max-width:760px){
     .hero-grid{grid-template-columns:1fr;gap:30px;}
@@ -463,7 +477,7 @@ src="https://www.facebook.com/tr?id=1649911516639530&ev=PageView&noscript=1"
 
 <main>
   <section class="hero">
-    <div class="wrap hero-grid">
+    <div class="wrap hero-grid reveal">
       <div>
         <p class="eyebrow">Guia digital em PDF · 20 módulos + 4 bônus</p>
         <h1>20 jeitos reais de fazer um <em>dinheiro extra</em>, começando neste fim de semana</h1>
@@ -494,7 +508,7 @@ src="https://www.facebook.com/tr?id=1649911516639530&ev=PageView&noscript=1"
   </section>
 
   <section class="alt">
-    <div class="wrap-narrow">
+    <div class="wrap-narrow reveal">
       <p class="eyebrow">Pra quem é</p>
       <h2 style="margin-top:12px;font-size:22px;">Esse guia foi pensado pra você se:</h2>
       <ul class="who-list">
@@ -508,13 +522,13 @@ src="https://www.facebook.com/tr?id=1649911516639530&ev=PageView&noscript=1"
 
   <section id="modulos">
     <div class="wrap">
-      <div class="sec-head">
+      <div class="sec-head reveal">
         <p class="eyebrow">O que tem dentro</p>
         <h2>20 módulos, organizados por quanto você tem pra investir</h2>
         <p>Cada módulo traz: o que é, quanto dá pra ganhar, quanto custa pra começar, onde achar cliente, mensagem pronta pra oferecer, como cobrar, como conseguir indicação e um plano de fim de semana. Escolha 1 pra começar — não precisa das 20 ao mesmo tempo.</p>
       </div>
 
-      <div class="group-block">
+      <div class="group-block reveal">
         <div class="group-head"><h3>Grupo 1 — Sem dinheiro pra investir agora</h3><span class="ginvest">R$0–R$150 pra começar</span></div>
         <div class="mod-grid">
           <div class="mod-card"><div class="top"><span class="num">01</span><span class="ico">🐶</span></div><span class="name">Passeador de cães</span><span class="tag-pill tag-green">Sem invest.</span><span class="gain">R$2.000–4.000/mês</span></div>
@@ -527,7 +541,7 @@ src="https://www.facebook.com/tr?id=1649911516639530&ev=PageView&noscript=1"
         </div>
       </div>
 
-      <div class="group-block">
+      <div class="group-block reveal">
         <div class="group-head"><h3>Grupo 2 — Baixo investimento</h3><span class="ginvest">R$100–R$400 pra começar</span></div>
         <div class="mod-grid">
           <div class="mod-card"><div class="top"><span class="num">08</span><span class="ico">🚗</span></div><span class="name">Lavagem de carros a domicílio</span><span class="tag-pill tag-blue">Baixo invest.</span><span class="gain">R$2.500–4.500/mês</span></div>
@@ -540,7 +554,7 @@ src="https://www.facebook.com/tr?id=1649911516639530&ev=PageView&noscript=1"
         </div>
       </div>
 
-      <div class="group-block">
+      <div class="group-block reveal">
         <div class="group-head"><h3>Grupo 3 — 100% digital</h3><span class="ginvest">R$0–R$120 pra começar</span></div>
         <div class="mod-grid">
           <div class="mod-card"><div class="top"><span class="num">15</span><span class="ico">🎬</span></div><span class="name">Edição de vídeos para redes sociais</span><span class="tag-pill tag-purple">Digital</span><span class="gain">R$2.000–7.000/mês</span></div>
@@ -552,7 +566,7 @@ src="https://www.facebook.com/tr?id=1649911516639530&ev=PageView&noscript=1"
         </div>
       </div>
 
-      <div class="inside-grid">
+      <div class="inside-grid reveal">
         <div class="inside-item"><span class="n">01</span><div><span class="t">O que é e quanto dá pra ganhar</span><p>Explicação direta + estimativa realista de faturamento.</p></div></div>
         <div class="inside-item"><span class="n">02</span><div><span class="t">Quanto precisa pra começar</span><p>Investimento inicial aproximado, sem surpresa.</p></div></div>
         <div class="inside-item"><span class="n">03</span><div><span class="t">Como encontrar clientes</span><p>Os canais que mais funcionam pra cada serviço.</p></div></div>
@@ -565,24 +579,24 @@ src="https://www.facebook.com/tr?id=1649911516639530&ev=PageView&noscript=1"
 
   <section class="alt">
     <div class="wrap">
-      <div class="sec-head">
+      <div class="sec-head reveal">
         <p class="eyebrow">De brinde</p>
         <h2>4 bônus pra facilitar sua primeira venda</h2>
       </div>
       <div class="bonus-grid">
-        <div class="bonus-card"><span class="b-ico">💬</span><span class="bonus-num">Bônus 01</span><h3>50 mensagens prontas</h3><p>Scripts pra abordar cliente, responder objeção e pedir indicação sem ficar sem graça.</p></div>
-        <div class="bonus-card"><span class="b-ico">🧮</span><span class="bonus-num">Bônus 02</span><h3>Calculadora de lucro</h3><p>Descubra quanto sobra depois de material, tempo e deslocamento — antes de cobrar errado.</p></div>
-        <div class="bonus-card"><span class="b-ico">🏁</span><span class="bonus-num">Bônus 03</span><h3>Plano "Primeiros R$100"</h3><p>Desafio de 7 dias com uma ação por dia pra chegar no seu primeiro cliente pagante.</p></div>
-        <div class="bonus-card"><span class="b-ico">✅</span><span class="bonus-num">Bônus 04</span><h3>Checklist da 1ª venda</h3><p>Passo a passo pra não esquecer nada entre "tive a ideia" e "recebi o pagamento".</p></div>
+        <div class="bonus-card reveal d1"><span class="b-ico">💬</span><span class="bonus-num">Bônus 01</span><h3>50 mensagens prontas</h3><p>Scripts pra abordar cliente, responder objeção e pedir indicação sem ficar sem graça.</p></div>
+        <div class="bonus-card reveal d2"><span class="b-ico">🧮</span><span class="bonus-num">Bônus 02</span><h3>Calculadora de lucro</h3><p>Descubra quanto sobra depois de material, tempo e deslocamento — antes de cobrar errado.</p></div>
+        <div class="bonus-card reveal d3"><span class="b-ico">🏁</span><span class="bonus-num">Bônus 03</span><h3>Plano "Primeiros R$100"</h3><p>Desafio de 7 dias com uma ação por dia pra chegar no seu primeiro cliente pagante.</p></div>
+        <div class="bonus-card reveal d4"><span class="b-ico">✅</span><span class="bonus-num">Bônus 04</span><h3>Checklist da 1ª venda</h3><p>Passo a passo pra não esquecer nada entre "tive a ideia" e "recebi o pagamento".</p></div>
       </div>
     </div>
   </section>
 
   <section>
     <div class="wrap-narrow">
-      <p class="eyebrow">Sem promessa vazia</p>
-      <h2 style="margin-top:12px;font-size:22px;">A gente prefere ser honesto a te vender um sonho</h2>
-      <div class="quote-card">
+      <p class="eyebrow reveal">Sem promessa vazia</p>
+      <h2 class="reveal" style="margin-top:12px;font-size:22px;">A gente prefere ser honesto a te vender um sonho</h2>
+      <div class="quote-card reveal">
         <p class="q">"Isso varia MUITO conforme sua região, o tempo que você dedica e a demanda local — trate como referência, não como promessa."</p>
         <p class="src">— trecho literal do guia, logo na introdução</p>
       </div>
@@ -590,13 +604,13 @@ src="https://www.facebook.com/tr?id=1649911516639530&ev=PageView&noscript=1"
       <!-- Espaço reservado: quando houver depoimentos reais de compradores (nome ou iniciais + módulo usado + resultado), adicionar aqui uma seção "O que dizem quem já usou". Não inserir depoimentos fictícios ou números de clientes/resultados inventados. -->
 
       <div class="trust-badges">
-        <div class="trust-badge"><span class="ti">📥</span> PDF liberado na hora, direto após a compra</div>
-        <div class="trust-badge"><span class="ti">🔒</span> Pagamento processado pela Kiwify</div>
-        <div class="trust-badge"><span class="ti">🇧🇷</span> Conteúdo 100% em português, direto ao ponto</div>
-        <div class="trust-badge"><span class="ti">↩</span> 7 dias de garantia, sem burocracia</div>
+        <div class="trust-badge reveal d1"><span class="ti">📥</span> PDF liberado na hora, direto após a compra</div>
+        <div class="trust-badge reveal d2"><span class="ti">🔒</span> Pagamento processado pela Kiwify</div>
+        <div class="trust-badge reveal d3"><span class="ti">🇧🇷</span> Conteúdo 100% em português, direto ao ponto</div>
+        <div class="trust-badge reveal d4"><span class="ti">↩</span> 7 dias de garantia, sem burocracia</div>
       </div>
 
-      <div class="guarantee">
+      <div class="guarantee reveal">
         <div class="stamp"><b>7</b><small>dias de<br>garantia</small></div>
         <div>
           <h3>Garantia incondicional de 7 dias</h3>
@@ -608,7 +622,7 @@ src="https://www.facebook.com/tr?id=1649911516639530&ev=PageView&noscript=1"
 
   <section class="alt" id="oferta">
     <div class="wrap-narrow">
-      <div class="price-card">
+      <div class="price-card reveal">
         <p class="was">de R$47,00</p>
         <p class="now">R$17<sup>,89</sup></p>
         <p class="compare">à vista · custa menos que um lanche, e pode virar sua primeira renda extra</p>
@@ -620,9 +634,9 @@ src="https://www.facebook.com/tr?id=1649911516639530&ev=PageView&noscript=1"
 
   <section>
     <div class="wrap-narrow">
-      <p class="eyebrow">Perguntas frequentes</p>
-      <h2 style="margin-top:12px;font-size:22px;margin-bottom:6px;">Antes de você decidir</h2>
-      <div>
+      <p class="eyebrow reveal">Perguntas frequentes</p>
+      <h2 class="reveal" style="margin-top:12px;font-size:22px;margin-bottom:6px;">Antes de você decidir</h2>
+      <div class="reveal">
         <details open>
           <summary>Preciso ter experiência ou já ter um negócio?</summary>
           <p>Não. O guia foi feito pra quem tá começando do zero — cada módulo assume que você nunca fez isso antes e te leva do "nem sei por onde começar" até o primeiro contato com um cliente.</p>
@@ -652,7 +666,7 @@ src="https://www.facebook.com/tr?id=1649911516639530&ev=PageView&noscript=1"
   </section>
 
   <section class="final">
-    <div class="wrap-narrow">
+    <div class="wrap-narrow reveal">
       <h2>Seu fim de semana já pode virar o começo de uma renda extra</h2>
       <p>20 módulos, 4 bônus, um plano de ação — e um investimento menor que um lanche.</p>
       <a class="btn btn-primary" href="https://pay.kiwify.com.br/nMXA3qV">Quero o guia por R$17,89 →</a>
@@ -688,5 +702,33 @@ src="https://www.facebook.com/tr?id=1649911516639530&ev=PageView&noscript=1"
     }
     document.addEventListener('scroll', onScroll, {passive:true});
     onScroll();
+  })();
+</script>
+<script>
+  (function(){
+    var mq = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (mq && mq.matches) return;
+    if (!('IntersectionObserver' in window)) return;
+    var els = document.querySelectorAll('.reveal');
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.14, rootMargin:'0px 0px -6% 0px'});
+    els.forEach(function(el){
+      var r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight * 0.92 && r.bottom > 0){
+        el.classList.add('in');
+      } else {
+        el.classList.add('pending');
+        io.observe(el);
+      }
+    });
+    setTimeout(function(){
+      document.querySelectorAll('.reveal.pending:not(.in)').forEach(function(el){ el.classList.add('in'); });
+    }, 2500);
   })();
 </script>
